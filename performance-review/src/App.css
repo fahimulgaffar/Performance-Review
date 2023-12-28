@@ -1,0 +1,285 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    min-height: 100%;
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    padding-bottom: 100px;
+    scroll-behavior: smooth;
+    overflow-x: hidden; /* Hide horizontal scrollbar */
+    overflow-y: auto; /* Allow vertical scrolling */
+}
+
+.App {
+    position: relative; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* Adjusted to start to allow natural page flow */
+    min-height: 100vh; /* Ensuring it takes at least the full viewport height */
+    padding-top: 40px; /* Adjusting as needed for fixed header/navigation */
+}
+
+/* Fixed Position for Signup and Login */
+.signup-section, .login-section {
+    position: fixed;
+    top: 20%; 
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+}
+
+
+
+/* Theme Colors - Dark and Light Modes */
+:root {
+    --primary-color: #0d6efd;
+    --hover-primary-color: #0a58ca;
+    --background-color: #121212;
+    --text-color: #e0e0e0;
+    --button-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+    --input-background: #1e1e1e;
+    --input-border: #333;
+    --dashboard-background: #1e1e1e;
+    --dashboard-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    --review-item-background: #252525;
+    --review-item-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --action-button-color: #28a745;
+    --hover-action-button-color: #218838;
+}
+
+.light {
+    --background-color: #ffffff;
+    --text-color: #000000;
+    --input-background: #ffffff;
+    --input-border: #cccccc;
+    --dashboard-background: #f8f9fa;
+    --review-item-background: #f0f0f0;
+}
+
+/* Typography */
+h1 {
+    color: var(--primary-color);
+    font-size: 2em;
+}
+
+/* Form Elements */
+input, button, textarea {
+    padding: 12px;
+    margin: 8px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    color: var(--text-color);
+    background-color: var(--input-background);
+    border: 1px solid var(--input-border);
+}
+
+button {
+    background-color: var(--primary-color);
+    box-shadow: var(--button-shadow);
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: var(--hover-primary-color);
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
+}
+
+textarea {
+    width: 100%;
+}
+
+/* Dashboard Styles */
+.dashboard {
+    background-color: var(--dashboard-background);
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: var(--dashboard-shadow);
+}
+
+/* Reviews List */
+.reviews-list {
+    list-style: none;
+    padding: 0;
+}
+
+.review-item {
+    background-color: var(--review-item-background);
+    padding: 20px;
+    margin: 10px 0;
+    border-radius: 10px;
+    box-shadow: var(--review-item-shadow);
+}
+
+/* Review Actions */
+.review-actions {
+    display: flex;
+    justify-content: space-between;
+}
+
+.review-actions button {
+    background-color: var(--action-button-color);
+}
+
+.review-actions button:hover {
+    background-color: var(--hover-action-button-color);
+    color: white;
+    box-shadow: 0 2px 4px rgba(255, 255, 255, 0.2);
+}
+
+/* Theme Switch */
+.theme-switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    margin: 10px;
+}
+
+.theme-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.theme-switch .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.theme-switch .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+.theme-switch input:checked + .slider {
+    background-color: #2196F3;
+}
+
+.theme-switch input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+.theme-switch input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+/* Profile Icon and User Info Popup */
+.profile-icon {
+    border: none;
+    background: none;
+    cursor: pointer;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    padding: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.profile-icon:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.user-info-popup {
+    position: fixed;
+    top: 60px;
+    right: 20px;
+    border: 1px solid #ccc;
+    background-color: var(--dashboard-background);
+    color: var(--text-color);
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    width: 250px;
+    z-index: 1001;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-20px);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+}
+
+.show-user-info .user-info-popup {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.user-info-popup p {
+    margin: 10px 0;
+    line-height: 1.4;
+}
+
+.user-info-popup button {
+    margin-top: 10px;
+    width: 100%;
+    padding: 8px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.user-info-popup button:hover {
+    background-color: var(--hover-primary-color);
+}
+
+/* Bottom Banner Styles */
+.bottom-banner {
+    background-color: #1b1d20;
+    color: #ffffff;
+    text-align: center;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 20px 0;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.5);
+    border-top: 3px solid #4a90e2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.contact-info, .group-members {
+    margin: 10px 0;
+    font-size: 1.1em;
+    text-align: center;
+}
+
+.contact-info {
+    font-weight: bold;
+}
+
+.group-members {
+    font-style: italic;
+}
+
